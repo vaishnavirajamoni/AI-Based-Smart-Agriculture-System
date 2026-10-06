@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crop Recommendation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result h2 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌾 Crop Recommendation</h1>
+
+    <p class="subtitle">
+        Enter soil and weather conditions to get the best crop recommendation.
+    </p>
+
+    <form action="/crop-recommendation" method="POST">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="N">Nitrogen (N)</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="N"
+                    name="N"
+                    placeholder="Enter nitrogen value"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="P">Phosphorus (P)</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="P"
+                    name="P"
+                    placeholder="Enter phosphorus value"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="K">Potassium (K)</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="K"
+                    name="K"
+                    placeholder="Enter potassium value"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="temperature">Temperature (°C)</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="temperature"
+                    name="temperature"
+                    placeholder="Enter temperature"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="humidity">Humidity (%)</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="humidity"
+                    name="humidity"
+                    placeholder="Enter humidity"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="ph">Soil pH</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="ph"
+                    name="ph"
+                    placeholder="Enter soil pH"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="rainfall">Rainfall (mm)</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="rainfall"
+                    name="rainfall"
+                    placeholder="Enter rainfall"
+                    required
+                >
+            </div>
+
+        </div>
+
+        <div class="button-container">
+            <button type="submit">
+                🌱 Get Crop Recommendation
+            </button>
+        </div>
+
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h2>Recommended Crop</h2>
+        <p>🌾 {{ prediction }}</p>
+    </div>
+    {% endif %}
+
+    <a href="/" class="back">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>
